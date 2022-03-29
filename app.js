@@ -103,8 +103,8 @@ function submit() {
         case 2: //FILTRO MEDIA 1/16
             convertToPixels(filtroMedia(matriz, 2), pixels);
             break;
-        case 3: //FILTRO MEDIA LAPACIANO
-            convertToPixels(filtroLapaciano(matriz, 1), pixels);
+        case 3: //FILTRO MEDIA laplaciano
+            convertToPixels(filtroLaplaciano(matriz, 1), pixels);
             break;
 
         default:
@@ -140,7 +140,6 @@ function filtroMediana(matriz) {
                 if (y - 1 + i < 0 || y - 1 + i >= matriz.length) {
                     continue;
                 }
-
                 for (let j = 0; j < 3; j++) {
                     if (x - 1 + j < 0 || x - 1 + j >= matriz[y].length)
                         continue;
@@ -149,7 +148,6 @@ function filtroMediana(matriz) {
             }
             let newPixelValue;
             values.sort();
-
             if (values.length % 2 == 0) {
                 let mid1 = values[Math.floor(values.length / 2)];
                 let mid2 = values[Math.floor(values.length / 2 - 1)];
@@ -160,23 +158,19 @@ function filtroMediana(matriz) {
     }
     return matrizCopia;
 }
-
 //MEDIA
-
 const filtro1 = [
     [1, 1, 1],
     [1, 1, 1],
     [1, 1, 1]
 ];
 const filtro1V = 9;
-
 const filtro2 = [
     [1, 2, 1],
     [2, 4, 2],
     [1, 2, 1]
 ];
 const filtro2V = 16;
-
 function filtroMedia(matriz, opcion) {
     let filtro = [];
     let filtroV = 1;
@@ -201,11 +195,11 @@ function filtroMedia(matriz, opcion) {
     for (let y in matriz) {
         for (let x in matriz[y]) {
             let values = new Array();
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < filtro.length; i++) {
                 if (y - 1 + i < 0 || y - 1 + i >= matriz.length) {
                     continue;
                 }
-                for (let j = 0; j < 3; j++) {
+                for (let j = 0; j < filtro.length; j++) {
                     if (x - 1 + j < 0 || x - 1 + j >= matriz[y].length)
                         continue;
                     values.push(matriz[y - 1 + i][x - 1 + j]);
@@ -217,6 +211,7 @@ function filtroMedia(matriz, opcion) {
                 for (const num of arr) {
                     suma += num * values[i];
                     i++;
+                    if (i >= values.length) break;
                 }
             }
             let newPixelValue = Math.round(suma / filtroV);
@@ -227,31 +222,40 @@ function filtroMedia(matriz, opcion) {
     return matrizCopia;
 }
 
-const lapaciano1 = [
+const laplaciano1 = [
     [1, 1, 1],
     [1, -8, 1],
     [1, 1, 1]
 ];
-function filtroLapaciano(matriz, opcion) {
-    let filtro = [];
+const laplaciano2 = [
+    [0, 1, 0],
+    [1, -4, 1],
+    [0, 1, 0]
+];
+const laplaciano3 = [
+    [-1, -1, -1],
+    [-1, 8, -1],
+    [-1, -1, -1]
+];
+function filtroLaplaciano(matriz, opcion) {
+    let filtro = [...laplaciano3];
     switch (opcion) {
         case 1:
-            filtro = [...lapaciano1];
+            //filtro = [...filtro1];
             break;
         case 2:
-            filtro = [...lapaciano1];
+            //filtro = [...filtro2];
             break;
         default:
     }
-
+    let mayor = Number.MIN_SAFE_INTEGER;
+    let menor = Number.MAX_SAFE_INTEGER;
     let matrizCopia = Array(matriz.length);
     let k = 0;
     for (const arr of matriz) {
         matrizCopia[k] = Array(arr.length);
         k++;
     }
-    let menor = Number.MAX_VALUE;
-    let mayor = Number.MIN_VALUE;
     for (let y in matriz) {
         for (let x in matriz[y]) {
             let values = new Array();
@@ -271,28 +275,28 @@ function filtroLapaciano(matriz, opcion) {
                 for (const num of arr) {
                     suma += num * values[i];
                     i++;
+                    if (i >= values.length) break;
                 }
             }
-            matrizCopia[y][x] = suma;
-            if (suma > mayor) mayor = suma;
-            if (suma < menor) menor = suma;
+            let newPixelValue = Math.round(suma);
+            if (mayor < newPixelValue) mayor = newPixelValue;
+            if (menor > newPixelValue) menor = newPixelValue;
+            matrizCopia[y][x] = newPixelValue;
         }
     }
-    expandirHistograma(matrizCopia);
+    console.log(menor, mayor);
+
+    expandirHistograma(matrizCopia, menor, mayor);
     return matrizCopia;
 }
-
 function expandirHistograma(histograma, menor, mayor) {
-    console.log(histograma);
-
     let m = 255 / (mayor - menor);
     let b = -m * menor;
-    console.log(m, b);
     const ecuacion = (r) => m * r + b;
     for (let i in histograma) {
         for (let j in histograma[i]) {
             histograma[i][j] = ecuacion(histograma[i][j]);
         }
     }
+    console.log(ecuacion(menor), ecuacion(mayor));
 }
-expandirHistograma(null, -5, 0);
