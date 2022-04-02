@@ -81,6 +81,20 @@ function convertToPixels(matriz, pixels) {
     }
 }
 
+function getValues(matriz, x, y) {
+    let values = new Array();
+    for (let i = 0; i < 3; i++) {
+        if (y - 1 + i < 0 || y - 1 + i >= matriz.length) {
+            continue;
+        }
+        for (let j = 0; j < 3; j++) {
+            if (x - 1 + j < 0 || x - 1 + j >= matriz[y].length) continue;
+            values.push(matriz[y - 1 + i][x - 1 + j]);
+        }
+    }
+    return values;
+}
+
 function submit() {
     let imgData = contextImgOrg.getImageData(
         0,
@@ -135,17 +149,7 @@ function filtroMediana(matriz) {
     }
     for (let y in matriz) {
         for (let x in matriz[y]) {
-            let values = new Array();
-            for (let i = 0; i < 3; i++) {
-                if (y - 1 + i < 0 || y - 1 + i >= matriz.length) {
-                    continue;
-                }
-                for (let j = 0; j < 3; j++) {
-                    if (x - 1 + j < 0 || x - 1 + j >= matriz[y].length)
-                        continue;
-                    values.push(matriz[y - 1 + i][x - 1 + j]);
-                }
-            }
+            let values = getValues(matriz, x, y);
             let newPixelValue;
             values.sort();
             if (values.length % 2 == 0) {
@@ -194,17 +198,7 @@ function filtroMedia(matriz, opcion) {
     }
     for (let y in matriz) {
         for (let x in matriz[y]) {
-            let values = new Array();
-            for (let i = 0; i < filtro.length; i++) {
-                if (y - 1 + i < 0 || y - 1 + i >= matriz.length) {
-                    continue;
-                }
-                for (let j = 0; j < filtro.length; j++) {
-                    if (x - 1 + j < 0 || x - 1 + j >= matriz[y].length)
-                        continue;
-                    values.push(matriz[y - 1 + i][x - 1 + j]);
-                }
-            }
+            let values = getValues(matriz, x, y);
             let suma = 0;
             let i = 0;
             for (const arr of filtro) {
@@ -258,17 +252,7 @@ function filtroLaplaciano(matriz, opcion) {
     }
     for (let y in matriz) {
         for (let x in matriz[y]) {
-            let values = new Array();
-            for (let i = 0; i < 3; i++) {
-                if (y - 1 + i < 0 || y - 1 + i >= matriz.length) {
-                    continue;
-                }
-                for (let j = 0; j < 3; j++) {
-                    if (x - 1 + j < 0 || x - 1 + j >= matriz[y].length)
-                        continue;
-                    values.push(matriz[y - 1 + i][x - 1 + j]);
-                }
-            }
+            let values = getValues(matriz, x, y);
             let suma = 0;
             let i = 0;
             for (const arr of filtro) {
