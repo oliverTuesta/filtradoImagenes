@@ -49,29 +49,29 @@ imageUploaded.onload = () => {
     );
 };
 
-function convertToMatriz(pixels) {
-    let matriz = Array(imageUploaded.height)
+function convertTomatrix(pixels) {
+    let matrix = Array(imageUploaded.height)
         .fill()
         .map(() => Array(imageUploaded.width));
     let i = 0,
         j = 0;
     for (let k = 0; k < pixels.length; k += 4) {
-        matriz[i][j] = pixels[k];
+        matrix[i][j] = pixels[k];
         j++;
         if (j >= imageUploaded.width) {
             j = 0;
             i++;
         }
     }
-    return matriz;
+    return matrix;
 }
 
-function convertToPixels(matriz, pixels) {
+function convertToPixels(matrix, pixels) {
     let x = 0;
-    //console.log(`matriz (${matriz.length} ${matriz[0].length})`);
+    //console.log(`matrix (${matrix.length} ${matrix[0].length})`);
     //console.log(`imagen (${imageUploaded.height} ${imageUploaded.width})`);
 
-    for (const arr of matriz) {
+    for (const arr of matrix) {
         for (const value of arr) {
             pixels[x] = value;
             pixels[x + 1] = value;
@@ -81,15 +81,20 @@ function convertToPixels(matriz, pixels) {
     }
 }
 
-function getValues(matriz, x, y) {
+function getValues(matrix, x, y) {
     let values = new Array();
     for (let i = 0; i < 3; i++) {
-        if (y - 1 + i < 0 || y - 1 + i >= matriz.length) {
-            continue;
-        }
         for (let j = 0; j < 3; j++) {
-            if (x - 1 + j < 0 || x - 1 + j >= matriz[y].length) continue;
-            values.push(matriz[y - 1 + i][x - 1 + j]);
+            if (
+                x - 1 + j < 0 ||
+                x - 1 + j >= matrix[y].length ||
+                y - 1 + i < 0 ||
+                y - 1 + i >= matrix.length
+            ) {
+                values.push(0);
+                continue;
+            }
+            values.push(matrix[y - 1 + i][x - 1 + j]);
         }
     }
     return values;
@@ -104,21 +109,21 @@ function submit() {
     );
 
     //contextImgOrg.filter = 'grayscale(1)';
-    let matriz = convertToMatriz(imgData.data);
+    let matrix = convertTomatrix(imgData.data);
     let pixels = imgData.data;
     switch (filtro_select.selectedIndex) {
         case 0: //FILTRO MEDIANA
-            convertToPixels(filtroMediana(matriz), pixels);
+            convertToPixels(filtroMediana(matrix), pixels);
             break;
         case 1: //FILTRO MEDIA 1/9
-            convertToPixels(filtroMedia(matriz, 1), pixels);
+            convertToPixels(filtroMedia(matrix, 1), pixels);
             break;
 
         case 2: //FILTRO MEDIA 1/16
-            convertToPixels(filtroMedia(matriz, 2), pixels);
+            convertToPixels(filtroMedia(matrix, 2), pixels);
             break;
         case 3: //FILTRO MEDIA laplaciano
-            convertToPixels(filtroLaplaciano(matriz, 1), pixels);
+            convertToPixels(filtroLaplaciano(matrix, 1), pixels);
             break;
 
         default:
@@ -139,17 +144,17 @@ function submit() {
 //***********************FILTROS***********************88
 //
 //MEDIANA
-function filtroMediana(matriz) {
-    let matrizCopia = Array(matriz.length);
+function filtroMediana(matrix) {
+    let matrixCopia = Array(matrix.length);
     let k = 0;
-    for (const arr of matriz) {
-        matrizCopia[k] = Array(arr.length);
+    for (const arr of matrix) {
+        matrixCopia[k] = Array(arr.length);
 
         k++;
     }
-    for (let y in matriz) {
-        for (let x in matriz[y]) {
-            let values = getValues(matriz, x, y);
+    for (let y in matrix) {
+        for (let x in matrix[y]) {
+            let values = getValues(matrix, x, y);
             let newPixelValue;
             values.sort();
             if (values.length % 2 == 0) {
@@ -157,10 +162,10 @@ function filtroMediana(matriz) {
                 let mid2 = values[Math.floor(values.length / 2 - 1)];
                 newPixelValue = Math.round((mid1 + mid2) / 2);
             } else newPixelValue = values[Math.floor(values.length / 2)];
-            matrizCopia[y][x] = newPixelValue;
+            matrixCopia[y][x] = newPixelValue;
         }
     }
-    return matrizCopia;
+    return matrixCopia;
 }
 //MEDIA
 const filtro1 = [
@@ -175,7 +180,7 @@ const filtro2 = [
     [1, 2, 1]
 ];
 const filtro2V = 16;
-function filtroMedia(matriz, opcion) {
+function filtroMedia(matrix, opcion) {
     let filtro = [];
     let filtroV = 1;
     switch (opcion) {
@@ -190,15 +195,15 @@ function filtroMedia(matriz, opcion) {
         default:
     }
 
-    let matrizCopia = Array(matriz.length);
+    let matrixCopia = Array(matrix.length);
     let k = 0;
-    for (const arr of matriz) {
-        matrizCopia[k] = Array(arr.length);
+    for (const arr of matrix) {
+        matrixCopia[k] = Array(arr.length);
         k++;
     }
-    for (let y in matriz) {
-        for (let x in matriz[y]) {
-            let values = getValues(matriz, x, y);
+    for (let y in matrix) {
+        for (let x in matrix[y]) {
+            let values = getValues(matrix, x, y);
             let suma = 0;
             let i = 0;
             for (const arr of filtro) {
@@ -210,10 +215,10 @@ function filtroMedia(matriz, opcion) {
             }
             let newPixelValue = Math.round(suma / filtroV);
 
-            matrizCopia[y][x] = newPixelValue;
+            matrixCopia[y][x] = newPixelValue;
         }
     }
-    return matrizCopia;
+    return matrixCopia;
 }
 
 const laplaciano1 = [
@@ -231,7 +236,7 @@ const laplaciano3 = [
     [-1, 8, -1],
     [-1, -1, -1]
 ];
-function filtroLaplaciano(matriz, opcion) {
+function filtroLaplaciano(matrix, opcion) {
     let filtro = [...laplaciano3];
     switch (opcion) {
         case 1:
@@ -244,15 +249,15 @@ function filtroLaplaciano(matriz, opcion) {
     }
     let mayor = Number.MIN_SAFE_INTEGER;
     let menor = Number.MAX_SAFE_INTEGER;
-    let matrizCopia = Array(matriz.length);
+    let matrixCopia = Array(matrix.length);
     let k = 0;
-    for (const arr of matriz) {
-        matrizCopia[k] = Array(arr.length);
+    for (const arr of matrix) {
+        matrixCopia[k] = Array(arr.length);
         k++;
     }
-    for (let y in matriz) {
-        for (let x in matriz[y]) {
-            let values = getValues(matriz, x, y);
+    for (let y in matrix) {
+        for (let x in matrix[y]) {
+            let values = getValues(matrix, x, y);
             let suma = 0;
             let i = 0;
             for (const arr of filtro) {
@@ -265,13 +270,13 @@ function filtroLaplaciano(matriz, opcion) {
             let newPixelValue = Math.round(suma);
             if (mayor < newPixelValue) mayor = newPixelValue;
             if (menor > newPixelValue) menor = newPixelValue;
-            matrizCopia[y][x] = newPixelValue;
+            matrixCopia[y][x] = newPixelValue;
         }
     }
     console.log(menor, mayor);
 
-    expandirHistograma(matrizCopia, menor, mayor);
-    return matrizCopia;
+    expandirHistograma(matrixCopia, menor, mayor);
+    return matrixCopia;
 }
 function expandirHistograma(histograma, menor, mayor) {
     let m = 255 / (mayor - menor);
