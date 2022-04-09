@@ -40,7 +40,7 @@ function filtroMediana(matrix) {
     return matrixCopia;
 }
 
-function filtroMedia(matrix, filtro) {
+function filtroMedia(matrix, filtro, divisor) {
     let matrixCopia = Array(matrix.length);
     let k = 0;
     for (const arr of matrix) {
@@ -57,10 +57,9 @@ function filtroMedia(matrix, filtro) {
                 for (const num of arr) {
                     suma += num * values[i];
                     i++;
-                    if (i >= values.length) break;
                 }
             }
-            let newPixelValue = Math.round(suma / 16);
+            let newPixelValue = Math.round(suma / divisor);
 
             matrixCopia[y][x] = newPixelValue;
         }
@@ -85,21 +84,66 @@ function convertToMatrix(pixels, w, h) {
     return matrix;
 }
 
+function filtroLaplaciano(matrix, mascara) {
+    let mayor = Number.MIN_SAFE_INTEGER;
+    let menor = Number.MAX_SAFE_INTEGER;
+    let matrixCopia = Array(matrix.length);
+    let k = 0;
+    for (const arr of matrix) {
+        matrixCopia[k] = Array(arr.length);
+        k++;
+    }
+    for (let y in matrix) {
+        for (let x in matrix[y]) {
+            let values = getValues(matrix, x, y, mascara.length);
+            let suma = 0;
+            let i = 0;
+            for (const arr of mascara) {
+                for (const num of arr) {
+                    suma += num * values[i];
+                    i++;
+                    if (i >= values.length) break;
+                }
+            }
+            let newPixelValue = Math.round(suma);
+            if (mayor < newPixelValue) mayor = newPixelValue;
+            if (menor > newPixelValue) menor = newPixelValue;
+            matrixCopia[y][x] = newPixelValue;
+        }
+    }
+
+    expandirHistograma(matrixCopia, menor, mayor);
+    return matrixCopia;
+}
+function expandirHistograma(histograma, menor, mayor) {
+    let m = 7 / (mayor - menor);
+    let b = -m * menor;
+    const ecuacion = (r) => Math.round(m * r + b);
+    for (let i in histograma) {
+        for (let j in histograma[i]) {
+            histograma[i][j] = ecuacion(histograma[i][j]);
+        }
+    }
+}
+
 let mascara = [
     [1, 2, 1],
     [2, 4, 2],
     [1, 2, 1]
 ];
 
-let imgOriginal = [
-    0, 4, 3, 3, 3, 4, 4, 3, 7, 3, 4, 4, 3, 3, 3, 0, 4, 3, 3, 3, 4, 4, 3, 7, 3
+let mascaraLapla = [
+    [1, 1, 1],
+    [1, -8, 1],
+    [1, 1, 1]
 ];
-matrix = convertToMatrix(imgOriginal, 5, 5);
+
+let histogrma = [1, 0, 0, 2, 7, 3, 3, 4, 4, 5, 2, 7, 1, 0, 1, 3];
+
+let imgOriginal = [
+    1, 0, 2, 2, 0, 7, 3, 3, 4, 1, 4, 5, 0, 7, 3, 1, 1, 1, 3, 5, 1, 6, 1, 4, 2
+];
+matrix = convertToMatrix(histogrma, 4, 4);
 console.log(matrix);
-console.log(filtroMediana(matrix));
-resultado = filtroMedia(matrix, mascara);
+resultado = filtroLaplaciano(matrix, mascaraLapla);
 console.log(resultado);
-console.log(resultado[3][4]);
-console.log(resultado[2][0]);
-console.log(resultado[1][1]);
-console.log(resultado[3][2]);
