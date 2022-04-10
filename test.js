@@ -1,4 +1,4 @@
-function getValues(matrix, x, y) {
+function getValues(matrix, x, y, addO = true) {
     let values = new Array();
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
@@ -8,7 +8,7 @@ function getValues(matrix, x, y) {
                 y - 1 + i < 0 ||
                 y - 1 + i >= matrix.length
             ) {
-                values.push(0);
+                if (addO) values.push(0);
                 continue;
             }
             values.push(matrix[y - 1 + i][x - 1 + j]);
@@ -26,7 +26,7 @@ function filtroMediana(matrix) {
     }
     for (let y in matrix) {
         for (let x in matrix[y]) {
-            let values = getValues(matrix, x, y);
+            let values = getValues(matrix, x, y, false);
             let newPixelValue;
             values.sort();
             if (values.length % 2 == 0) {
@@ -138,12 +138,16 @@ let mascaraLapla = [
     [1, 1, 1]
 ];
 
-let histogrma = [1, 0, 0, 2, 7, 3, 3, 4, 4, 5, 2, 7, 1, 0, 1, 3];
+let histogrma2 = [1, 0, 0, 2, 7, 3, 3, 4, 4, 5, 2, 7, 1, 0, 1, 3];
 
-let imgOriginal = [
-    1, 0, 2, 2, 0, 7, 3, 3, 4, 1, 4, 5, 0, 7, 3, 1, 1, 1, 3, 5, 1, 6, 1, 4, 2
+let histogrma = [
+    0, 4, 3, 3, 3, 4, 4, 3, 7, 3, 4, 4, 3, 3, 3, 0, 4, 3, 3, 3, 4, 4, 3, 7, 3
 ];
-matrix = convertToMatrix(histogrma, 4, 4);
+
+matrix = convertToMatrix(histogrma, 5, 5);
+
+console.log('Matriz Original:');
 console.log(matrix);
-resultado = filtroLaplaciano(matrix, mascaraLapla);
+console.log('Filtro mediana aplicado: ');
+resultado = filtroMediana(matrix, false);
 console.log(resultado);

@@ -91,7 +91,7 @@ function convertToPixels(matrix, pixels) {
 }
 
 // Esta funcion devuelve el pixel en una cierta coordenada(x,y) y los pixeles vecinos
-function getValues(matrix, x, y, matrixSize) {
+function getValues(matrix, x, y, matrixSize, addO = true) {
     let values = new Array();
     let aux = Math.floor(matrixSize / 2);
     for (let i = 0; i < matrixSize; i++) {
@@ -102,7 +102,7 @@ function getValues(matrix, x, y, matrixSize) {
                 y - aux + i < 0 ||
                 y - aux + i >= matrix.length
             ) {
-                values.push(0);
+                if (addO) values.push(0);
                 continue;
             }
             values.push(matrix[y - aux + i][x - aux + j]);
@@ -191,7 +191,7 @@ function filtroMediana(matrix, matrixSize) {
     // Doble bucle for para recorrer todos los pixeles de nuestra imagen
     for (let y in matrix) {
         for (let x in matrix[y]) {
-            let values = getValues(matrix, x, y, matrixSize);
+            let values = getValues(matrix, x, y, matrixSize, false);
             let newPixelValue;
             // se ordena los valores obtenidos de la vecindad
             values.sort();
