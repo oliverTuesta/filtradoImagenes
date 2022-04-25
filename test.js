@@ -118,7 +118,7 @@ function filtroLaplaciano(matrix, mascara) {
 function expandirHistograma(histograma, menor, mayor) {
     let m = 7 / (mayor - menor);
     let b = -m * menor;
-    const ecuacion = (r) => Math.round(m * r + b);
+    const ecuacion = (r) => Math.round(Math.round((m * r + b) * 100) / 100);
     for (let i in histograma) {
         for (let j in histograma[i]) {
             histograma[i][j] = ecuacion(histograma[i][j]);
@@ -133,21 +133,21 @@ let mascara = [
 ];
 
 let mascaraLapla = [
-    [1, 1, 1],
-    [1, -8, 1],
-    [1, 1, 1]
+    [0, 1, 0],
+    [1, -4, 1],
+    [0, 1, 0]
 ];
 
-let histogrma2 = [1, 0, 0, 2, 7, 3, 3, 4, 4, 5, 2, 7, 1, 0, 1, 3];
+let histogrma2 = [3, 0, 5, 0, 3, 0, 1, 0, 4, 0, 0, 0, 7, 0, 7, 0];
 
 let histogrma = [
     0, 4, 3, 3, 3, 4, 4, 3, 7, 3, 4, 4, 3, 3, 3, 0, 4, 3, 3, 3, 4, 4, 3, 7, 3
 ];
 
-matrix = convertToMatrix(histogrma, 5, 5);
+matrix = convertToMatrix(histogrma2, 4, 4);
 
 console.log('Matriz Original:');
 console.log(matrix);
-console.log('Filtro mediana aplicado: ');
-resultado = filtroMediana(matrix, false);
+//console.log('Filtro mediana aplicado: ');
+resultado = filtroLaplaciano(matrix, mascaraLapla);
 console.log(resultado);

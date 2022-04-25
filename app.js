@@ -277,7 +277,7 @@ function filtroLaplaciano(matrix, mascara) {
 function reescalarHistograma(histograma, menor, mayor) {
     let m = 255 / (mayor - menor);
     let b = -m * menor;
-    const ecuacion = (r) => m * r + b;
+    const ecuacion = (r) => Math.round(Math.round((m * r + b) * 100) / 100);
     for (let i in histograma) {
         for (let j in histograma[i]) {
             histograma[i][j] = ecuacion(histograma[i][j]);
