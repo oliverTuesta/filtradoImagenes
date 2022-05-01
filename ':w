@@ -19,7 +19,6 @@ https://templatemo.com/tm-538-digital-trend
         />
 
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/font-awesome.min.css" />
         <link rel="stylesheet" href="css/aos.css" />
         <link rel="stylesheet" href="css/owl.carousel.min.css" />
@@ -122,21 +121,22 @@ https://templatemo.com/tm-538-digital-trend
                     <div class="col-lg-7 mx-auto col-md-10 col-12">
                         <div class="about-info">
                             <h2 class="mb-4" data-aos="fade-up">
-                                Que es
-                                <strong>el filtrado</strong>
-                                de imagenes?
+                                the best
+                                <strong>Digital Marketing agency</strong> in Rio
+                                de Janeiro
                             </h2>
 
                             <p class="mb-0" data-aos="fade-up">
-                                El filtrado de imágenes conforma una de las
-                                principales características en el procesamiento
-                                de imágenes digitales. De esta forma, se
-                                considera como el conjunto de técnicas que
-                                ayudan a mejorar el nivel de calidad en una
-                                imagen; facilita la búsqueda de información;
-                                además, permite saber los patrones de actuación
-                                u operaciones que se encuentran presentes en
-                                cada una de ellas
+                                Total 5 HTML pages are included in this template
+                                from TemplateMo website. Please check 2
+                                <a href="blog.html">blog</a> pages,
+                                <a href="project-detail.html">project</a> page,
+                                and <a href="contact.html">contact</a> page.
+                                <br /><br />You are <strong>allowed</strong> to
+                                use this template for commercial or
+                                non-commercial purpose. You are NOT allowed to
+                                redistribute the template ZIP file on template
+                                collection websites.
                             </p>
                         </div>
 
@@ -157,14 +157,13 @@ https://templatemo.com/tm-538-digital-trend
         </section>
 
         <!-- PROJECT -->
-        <section class="project section-padding" id="project">
-            <div data-aos="fade-up" class="imagenes">
+        <section class="project section-padding fade-up" id="project">
+            <div class="imagenes">
                 <canvas id="imagen_filtrada" width="750" height="400"> </canvas>
                 <canvas id="imagen_original" width="750" height="400"> </canvas>
             </div>
             <div class="container">
                 <input
-                    data-aos="fade-up"
                     type="file"
                     id="image_input"
                     accept="image/png, image/jpg, image/jpeg"
@@ -172,16 +171,15 @@ https://templatemo.com/tm-538-digital-trend
                 <div id="display_image"></div>
             </div>
             <button
-                data-aos="fade-up"
                 id="download-button"
                 type="download"
                 onclick="downloadCanvas()"
             >
                 download
             </button>
-            <form data-aos="fade-up" action="filtro" method="post">
+            <form action="filtro" method="post">
                 <label for="filtro">
-                    <select data-aos="fade-up" name="filtro" id="filtro">
+                    <select name="filtro" id="filtro">
                         <option value="mediana">mediana</option>
                         <option value="media1/9">media1/9</option>
                         <option value="media1/16">media1/16</option>
@@ -189,14 +187,7 @@ https://templatemo.com/tm-538-digital-trend
                     </select>
                 </label>
             </form>
-            <button
-                data-aos="fade-up"
-                id="submit"
-                type="submit"
-                onclick="submit()"
-            >
-                Submit
-            </button>
+            <button id="submit" type="submit" onclick="submit()">Submit</button>
         </section>
 
         <!-- TESTIMONIAL -->
@@ -251,9 +242,42 @@ https://templatemo.com/tm-538-digital-trend
                             data-aos="fade-up"
                             data-aos-delay="100"
                         >
-                        pipipi
-                            <strong>aqui va</strong> alguna frase
+                            We make creative <strong>brands</strong> only.
                         </h1>
+                    </div>
+
+                    <div
+                        class="col-lg-3 col-md-6 col-12"
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                    >
+                        <h4 class="my-4">Contact Info</h4>
+
+                        <p class="mb-1">
+                            <i class="fa fa-phone mr-2 footer-icon"></i>
+                            +99 080 070 4224
+                        </p>
+
+                        <p>
+                            <a href="#">
+                                <i class="fa fa-envelope mr-2 footer-icon"></i>
+                                hello@company.com
+                            </a>
+                        </p>
+                    </div>
+
+                    <div
+                        class="col-lg-3 col-md-6 col-12"
+                        data-aos="fade-up"
+                        data-aos-delay="300"
+                    >
+                        <h4 class="my-4">Our Studio</h4>
+
+                        <p class="mb-1">
+                            <i class="fa fa-home mr-2 footer-icon"></i>
+                            Av. Lúcio Costa - Barra da Tijuca, Rio de Janeiro -
+                            RJ, Brazil
+                        </p>
                     </div>
 
                     <div
@@ -262,8 +286,7 @@ https://templatemo.com/tm-538-digital-trend
                         data-aos-delay="400"
                     >
                         <p class="copyright-text">
-                            Copyright &copy; 2022 Grupo 3 Matematica
-                            Computacional
+                            Copyright &copy; 2020 Your Company
                             <br />
                             <a
                                 rel="nofollow noopener"
@@ -278,22 +301,25 @@ https://templatemo.com/tm-538-digital-trend
                         data-aos="fade-up"
                         data-aos-delay="500"
                     >
-                        <h4>Integrantes</h4>
-                        <ul id="integrantes">
-                            <li>
-                                <p>Oliver</p>
-                            </li>
+                        <ul class="footer-link">
+                            <li><a href="#">Stories</a></li>
+                            <li><a href="#">Work with us</a></li>
+                            <li><a href="#">Privacy</a></li>
+                        </ul>
+                    </div>
 
-                            <li>
-                                <p>Camila</p>
-                            </li>
-                            <li>
-                                <p>Jonas</p>
-                            </li>
-                            <li>
-                                <p>Joaquin</p>
-                            </li>
-
+                    <div
+                        class="col-lg-3 mx-lg-auto col-md-6 col-12"
+                        data-aos="fade-up"
+                        data-aos-delay="600"
+                    >
+                        <ul class="social-icon">
+                            <li><a href="#" class="fa fa-instagram"></a></li>
+                            <li><a href="#" class="fa fa-twitter"></a></li>
+                            <li><a href="#" class="fa fa-dribbble"></a></li>
+                            <li><a href="#" class="fa fa-behance"></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </footer>
