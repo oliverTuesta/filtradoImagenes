@@ -2,7 +2,8 @@
     padding: 60px;
 }
 
-#imagen_filtrada {
+#imagen_filtrada,
+#imagen_original {
     background-color: White;
 }
 
