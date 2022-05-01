@@ -24,11 +24,16 @@ https://templatemo.com/tm-538-digital-trend
         <link rel="stylesheet" href="css/aos.css" />
         <link rel="stylesheet" href="css/owl.carousel.min.css" />
         <link rel="stylesheet" href="css/owl.theme.default.min.css" />
-        <link rel="stylesheet" href="codigo/style.css" />
 
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="css/templatemo-digital-trend.css" />
+
+
+
+
     </head>
+
+
 
     <body>
         <!-- MENU BAR -->
@@ -40,8 +45,10 @@ https://templatemo.com/tm-538-digital-trend
                 </a>
 
                 <button
+
                     class="navbar-toggler"
                     type="button"
+
                     data-toggle="collapse"
                     data-target="#navbarNav"
                     aria-controls="navbarNav"
@@ -164,25 +171,18 @@ https://templatemo.com/tm-538-digital-trend
                 <canvas id="imagen_filtrada" width="750" height="400"> </canvas>
                 <canvas id="imagen_original" width="750" height="400"> </canvas>
             </div>
-            <div class="custom-file" data-aos="fade-up">
+            <div class="container form-group">
                 <input
-                    id="image_input"
+                        class="form-control-file"
+                    data-aos="fade-up"
                     type="file"
-                    class="custom-file-input"
-                    lang="es"
+                    id="image_input"
+                    accept="image/png, image/jpg, image/jpeg"
                 />
-                <label class="custom-file-label" for="customFileLang"
-                    >Seleccionar Archivo</label
-                >
             </div>
             <form data-aos="fade-up" action="filtro" method="post">
                 <label for="filtro" class="">
-                    <select
-                        data-aos="fade-up"
-                        name="filtro"
-                        id="filtro"
-                        class="form-control form-control-lg"
-                    >
+                    <select data-aos="fade-up" name="filtro" id="filtro" class="form-control form-control-lg">
                         <option value="mediana">mediana</option>
                         <option value="media1/9">media1/9</option>
                         <option value="media1/16">media1/16</option>
@@ -191,25 +191,26 @@ https://templatemo.com/tm-538-digital-trend
                 </label>
             </form>
             <div id="submit">
-                <button
-                    class="btn btn-lg btn-outline-primary"
-                    data-aos="fade-up"
-                    id="submit"
-                    type="submit"
-                    onclick="submit()"
-                >
-                    Submit
-                </button>
+                
+            <button
+                    class=" btn btn-lg btn-outline-primary"
+                data-aos="fade-up"
+                id="submit"
+                type="submit"
+                onclick="submit()"
+            >
+                Submit
+            </button>
 
-                <button
-                    class="btn btn-lg btn-primary"
-                    data-aos="fade-up"
-                    id="download-button"
-                    type="download"
-                    onclick="downloadCanvas()"
-                >
-                    download
-                </button>
+            <button
+                class="btn btn-lg btn-primary"
+                data-aos="fade-up"
+                id="download-button"
+                type="download"
+                onclick="downloadCanvas()"
+            >
+                download
+            </button>
             </div>
         </section>
 
@@ -255,6 +256,7 @@ https://templatemo.com/tm-538-digital-trend
                 </div>
             </div>
         </section>
+
         <footer class="site-footer">
             <div class="container">
                 <div class="row">
@@ -264,8 +266,8 @@ https://templatemo.com/tm-538-digital-trend
                             data-aos="fade-up"
                             data-aos-delay="100"
                         >
-                            Si puedes imaginarlo
-                            <strong>puedes programarlo</strong>
+                        Si puedes imaginarlo
+                            <strong>puedes programarlo</strong> 
                         </h1>
                     </div>
 
@@ -309,8 +311,7 @@ https://templatemo.com/tm-538-digital-trend
                             <li>
                                 <p>Joaquin</p>
                             </li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </footer>
@@ -325,3 +326,4 @@ https://templatemo.com/tm-538-digital-trend
         <script src="js/custom.js"></script>
     </body>
 </html>
+
