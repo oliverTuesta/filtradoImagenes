@@ -2,6 +2,10 @@
     padding: 60px;
 }
 
+#filtro {
+    margin: 10px 0;
+}
+
 #imagen_filtrada,
 #imagen_original {
     background-color: White;
