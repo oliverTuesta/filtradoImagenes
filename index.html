@@ -148,9 +148,9 @@ https://templatemo.com/tm-538-digital-trend
                             data-aos-delay="200"
                         >
                             <img
-                                src="images/office.png"
+                                src="images/photographer.jpg"
                                 class="img-fluid"
-                                alt="office"
+                                alt="photographer"
                             />
                         </div>
                     </div>
@@ -164,17 +164,22 @@ https://templatemo.com/tm-538-digital-trend
                 <canvas id="imagen_filtrada" width="750" height="400"> </canvas>
                 <canvas id="imagen_original" width="750" height="400"> </canvas>
             </div>
-            <div class="custom-file" data-aos="fade-up">
-                <input
-                    id="image_input"
-                    type="file"
-                    class="custom-file-input"
-                    lang="es"
-                    accept="image/png,image/jpeg,image/jpg"
-                />
-                <label class="custom-file-label" for="customFileLang"
-                    >Seleccionar Archivo</label
-                >
+            <div id="image_picker">
+                <div class="custom-file" data-aos="fade-up">
+                    <input
+                        id="image_input"
+                        type="file"
+                        class="custom-file-input"
+                        lang="es"
+                        accept="image/png,image/jpeg,image/jpg"
+                    />
+                    <label class="custom-file-label" for="customFileLang"
+                        >Seleccionar Archivo</label
+                    >
+                </div>
+                <button class="btn btn-primary bg-dark" onclick="randomImage()">
+                    Random
+                </button>
             </div>
             <form data-aos="fade-up" action="filtro" method="post">
                 <label for="filtro" class="">

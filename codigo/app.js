@@ -29,8 +29,8 @@ image_input.addEventListener('change', function () {
     reader.addEventListener('load', () => {
         uploaded_image = reader.result;
         document.querySelector('#display_image');
-
         imageUploaded.src = uploaded_image;
+        console.log(uploaded_image);
     });
     reader.readAsDataURL(this.files[0]);
 });
@@ -282,3 +282,13 @@ function reescalarHistograma(histograma, menor, mayor) {
         }
     }
 }
+
+function randomImage() {
+    const i = Math.floor(Math.random() * 8) + 1;
+    imageUploaded.src = 'images/examples/' + i + '.jpg';
+}
+
+function start() {
+    randomImage();
+}
+start();
