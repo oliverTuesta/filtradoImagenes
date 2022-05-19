@@ -35,12 +35,24 @@
     width: 45%;
 }
 
+#integrantes {
+    display: flex;
+    flex-direction: row;
+}
+
 @media (max-width: 880px) {
+    #matematica_computacional {
+        font-size: 1em;
+    }
     .imagenes {
         flex-direction: column-reverse;
     }
     .imagenes canvas {
         width: 100%;
+    }
+
+    #integrantes {
+        flex-direction: column;
     }
 }
 
