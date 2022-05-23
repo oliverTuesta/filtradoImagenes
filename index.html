@@ -163,13 +163,17 @@ https://templatemo.com/tm-538-digital-trend
         </section>
 
         <!-- PROJECT -->
-        <section class="project section-padding" id="project">
-            <div data-aos="fade-up" class="imagenes">
+        <section
+            data-aos="fade-up"
+            class="project section-padding"
+            id="project"
+        >
+            <div class="imagenes">
                 <canvas id="imagen_filtrada" width="750" height="400"> </canvas>
                 <canvas id="imagen_original" width="750" height="400"> </canvas>
             </div>
             <div id="image_picker">
-                <div class="custom-file" data-aos="fade-up">
+                <div class="custom-file">
                     <input
                         id="image_input"
                         type="file"
@@ -185,10 +189,9 @@ https://templatemo.com/tm-538-digital-trend
                     Random
                 </button>
             </div>
-            <form data-aos="fade-up" action="filtro" method="post">
+            <form action="filtro" method="post">
                 <label for="filtro" class="">
                     <select
-                        data-aos="fade-up"
                         name="filtro"
                         id="filtro"
                         class="form-control form-control-lg"
@@ -203,7 +206,6 @@ https://templatemo.com/tm-538-digital-trend
             <div id="submit">
                 <button
                     class="btn btn-lg btn-outline-primary"
-                    data-aos="fade-up"
                     id="submit"
                     type="submit"
                     onclick="submit()"
@@ -213,7 +215,6 @@ https://templatemo.com/tm-538-digital-trend
 
                 <button
                     class="btn btn-lg btn-primary"
-                    data-aos="fade-up"
                     id="download-button"
                     type="download"
                     onclick="downloadCanvas()"
