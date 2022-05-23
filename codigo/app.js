@@ -4,8 +4,8 @@ const imgFil_canvas = document.getElementById('imagen_filtrada');
 const imgOrg_canvas = document.getElementById('imagen_original');
 const filtro_select = document.getElementById('filtro');
 
-const contextImgFil = imgFil_canvas.getContext('2d');
 const contextImgOrg = imgOrg_canvas.getContext('2d');
+const contextImgFil = imgFil_canvas.getContext('2d');
 
 // Inisializacion de la variable que guardara la imagen
 let imageUploaded = new Image();
@@ -115,8 +115,8 @@ function submit() {
     let imgData = contextImgOrg.getImageData(
         0,
         0,
-        imgOrg_canvas.width,
-        imgOrg_canvas.height
+        imageUploaded.width,
+        imageUploaded.height
     );
 
     //contextImgOrg.filter = 'grayscale(1)';
@@ -151,6 +151,11 @@ function submit() {
         [-1, 8, -1],
         [-1, -1, -1]
     ];
+    const sobel1 = [
+        [1, 0, -1],
+        [2, 0, -2],
+        [1, 0, -1]
+    ];
 
     // De acuerdo al filtro que selecciono el usuario se llama a la funcion que le corresponde
     switch (filtro_select.selectedIndex) {
@@ -160,12 +165,11 @@ function submit() {
         case 1: //FILTRO MEDIA 1/9
             convertToPixels(filtroMedia(matrix, mascara9, 9), pixels);
             break;
-
-        case 2: //FILTRO MEDIA 1/16
-            convertToPixels(filtroMedia(matrix, mascara16, 16), pixels);
-            break;
-        case 3: //FILTRO MEDIA laplaciano
+        case 2: //FILTRO LAPLACIANO
             convertToPixels(filtroLaplaciano(matrix, laplaciano2), pixels);
+            break;
+        case 3: //FILTRO SOBEL
+            convertToPixels(filtroLaplaciano(matrix, sobel1), pixels);
             break;
 
         default:
