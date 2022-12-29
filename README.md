@@ -1,42 +1,19 @@
 # Filtrado de Imagenes
 
-## Tabla de contenidos
+A web-based image processing tool that allows users to apply Sobel, Laplacian,
+and Median filters to both random and uploaded images. Check out the
+[website](https://image-filter-tool.com) to see the tool in action. To apply a
+filter, select an image and choose a filter from the dropdown menu. Use the
+preview button to see the changes in real-time before applying the filter to the
+final image.
 
--   [Informacion General](#informacion-general)
--   [Tecnologias](#tecnologias)
--   [Diseño](#diseño)
--   [Setup](#setup)
+## Features
 
-## Informacion General
+-   Apply Sobel, Laplacian, and Median filters to images
+-   Preview changes in real-time before applying the filter
+-   Support for both random and uploaded images
 
-Simple pagina web para filtrar imagenes usando el filtro de media, mediana y
-laplaciano
-
-## Tecnologias
-
-Project is created with:
+## Technologies Used
 
 -   JavaScript
-
-## Diseño
-
-This project design was made by [TemplateMo](https://templatemo.com/)
-
-## Setup
-
-<ol>
-    <li><p>Clone this repository</p></li>
-    
-```
-$ git clone https://github.com/oliverTuesta/filtradoImagenes.git
-```
-<blockquote>
-    <p>The principal code is in the folder <b>code</b></p>
-</blockquote>
-<br></br>
-<br></br>
-<br></br><br></br><br></br><br></br>
-
-<li><p>Start <b>index.html</b> with your favorite browser</p></li>
-
-</ol>
+-   Bootstrap 4.0
